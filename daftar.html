@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Daftar - Finance Tracker</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/auth.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&family=Crimson+Pro:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="auth-container">
+    <div class="auth-background">
+      <div class="gradient-orb orb-1"></div>
+      <div class="gradient-orb orb-2"></div>
+    </div>
+
+    <div class="auth-content">
+      <!-- Left Side - Branding -->
+      <div class="auth-branding">
+        <a href="index.html" class="logo">
+          <span class="logo-icon">₹</span>
+          <span class="logo-text">FinanceTracker</span>
+        </a>
+        <h1 class="auth-title">Mulai Kelola Keuangan Anda</h1>
+        <p class="auth-subtitle">Daftar sekarang dan nikmati fitur lengkap secara gratis</p>
+        
+        <div class="auth-features">
+          <div class="feature-item">
+            <div class="feature-icon">✓</div>
+            <div class="feature-text">
+              <strong>Gratis Selamanya</strong>
+              <span>Tidak ada biaya tersembunyi</span>
+            </div>
+          </div>
+          <div class="feature-item">
+            <div class="feature-icon">✓</div>
+            <div class="feature-text">
+              <strong>Data Aman & Privat</strong>
+              <span>Hanya Anda yang bisa akses</span>
+            </div>
+          </div>
+          <div class="feature-item">
+            <div class="feature-icon">✓</div>
+            <div class="feature-text">
+              <strong>Mudah Digunakan</strong>
+              <span>Interface intuitif dan simpel</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Side - Form -->
+      <div class="auth-form-container">
+        <div class="auth-form-wrapper">
+          <div class="form-header">
+            <h2>Buat Akun</h2>
+            <p>Isi data diri Anda untuk memulai</p>
+          </div>
+
+          <form id="signupForm" class="auth-form">
+            <div class="form-group">
+              <label for="name">Nama Lengkap</label>
+              <div class="input-wrapper">
+                <svg class="input-icon" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                </svg>
+                <input 
+                  type="text" 
+                  id="name" 
+                  name="name" 
+                  placeholder="John Doe"
+                  required
+                >
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="email">Email</label>
+              <div class="input-wrapper">
+                <svg class="input-icon" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                 </svg>
+                <input 
+                  type="email" 
+                  id="email" 
+                  name="email" 
+                  placeholder="nama@email.com"
+                  required
+                >
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="password">Password</label>
+              <div class="input-wrapper">
+                <svg class="input-icon" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                </svg>
+                <input 
+                  type="password" 
+                  id="password" 
+                  name="password" 
+                  placeholder="Minimal 6 karakter"
+                  required
+                  minlength="6"
+                >
+                <button type="button" class="toggle-password" id="togglePassword">
+                  <svg class="eye-icon" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                    <path d="M1.66667 10C1.66667 10 4.16667 4.16667 10 4.16667C15.8333 4.16667 18.3333 10 18.3333 10C18.3333 10 15.8333 15.8333 10 15.8333C4.16667 15.8333 1.66667 10 1.66667 10Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M10 12.5C11.3807 12.5 12.5 11.3807 12.5 10C12.5 8.61929 11.3807 7.5 10 7.5C8.61929 7.5 7.5 8.61929 7.5 10C7.5 11.3807 8.61929 12.5 10 12.5Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </button>
+              </div>
+              <small class="input-hint">Password harus minimal 6 karakter</small>
+            </div>
+
+            <div id="errorMessage" class="error-message" style="display: none;"></div>
+            <div id="successMessage" class="success-message" style="display: none;"></div>
+
+            <button type="submit" class="btn-submit" id="signupBtn">
+              <span class="btn-text">Daftar Sekarang</span>
+              <span class="btn-loader" style="display: none;">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                  <circle cx="10" cy="10" r="8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-dasharray="50.265" stroke-dashoffset="25"/>
+                </svg>
+              </span>
+            </button>
+          </form>
+
+          <div class="form-footer">
+            <p>Sudah punya akun? <a href="login.html">Login di sini</a></p>
+            <a href="index.html" class="back-link">← Kembali ke Beranda</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/api.js"></script>
+  <script src="js/auth.js"></script>
+  <script>
+    // Redirect if already logged in
+    Auth.redirectIfLoggedIn();
+
+    // Toggle password visibility
+    const togglePassword = document.getElementById('togglePassword');
+    const passwordInput = document.getElementById('password');
+
+    togglePassword.addEventListener('click', () => {
+      const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+      passwordInput.setAttribute('type', type);
+      togglePassword.classList.toggle('active');
+    });
+
+    // Handle signup form submission
+    const signupForm = document.getElementById('signupForm');
+    const errorMessage = document.getElementById('errorMessage');
+    const successMessage = document.getElementById('successMessage');
+    const signupBtn = document.getElementById('signupBtn');
+    const btnText = signupBtn.querySelector('.btn-text');
+    const btnLoader = signupBtn.querySelector('.btn-loader');
+
+    signupForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      // Get form data
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const password = document.getElementById('password').value;
+
+      // Show loader
+      signupBtn.disabled = true;
+      btnText.style.display = 'none';
+      btnLoader.style.display = 'block';
+      errorMessage.style.display = 'none';
+      successMessage.style.display = 'none';
+
+      // Attempt signup
+      const result = await Auth.signup({ name, email, password });
+
+      if (result.success) {
+        // Success - show message and redirect
+        successMessage.textContent = result.message + ' Mengalihkan...';
+        successMessage.style.display = 'block';
+        
+        setTimeout(() => {
+          window.location.href = 'dashboard.html';
+        }, 1000);
+      } else {
+        // Show error
+        errorMessage.textContent = result.message;
+        errorMessage.style.display = 'block';
+        
+        // Reset button
+        signupBtn.disabled = false;
+        btnText.style.display = 'block';
+        btnLoader.style.display = 'none';
+      }
+    });
+  </script>
+</body>
+</html>
