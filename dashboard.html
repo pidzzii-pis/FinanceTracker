@@ -1,0 +1,213 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard - Finance Tracker</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&family=Crimson+Pro:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body class="dashboard-body">
+  <!-- Sidebar -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <div class="logo">
+        <span class="logo-icon">₹</span>
+        <span class="logo-text">FinanceTracker</span>
+      </div>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a href="#" class="nav-item active">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+          <path d="M3 10H17M3 5H17M3 15H17" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+        <span>Dashboard</span>
+      </a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <div class="user-profile">
+        <div class="user-avatar" id="userAvatar"></div>
+        <div class="user-info">
+          <div class="user-name" id="userName"></div>
+          <div class="user-email" id="userEmail"></div>
+        </div>
+      </div>
+      <button class="btn-logout" id="logoutBtn">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+          <path d="M6.75 15.75H3.75C3.35218 15.75 2.97064 15.592 2.68934 15.3107C2.40804 15.0294 2.25 14.6478 2.25 14.25V3.75C2.25 3.35218 2.40804 2.97064 2.68934 2.68934C2.97064 2.40804 3.35218 2.25 3.75 2.25H6.75M12 12.75L15.75 9M15.75 9L12 5.25M15.75 9H6.75" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        Logout
+      </button>
+    </div>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <!-- Top Bar -->
+    <header class="topbar">
+      <button class="mobile-menu-btn" id="mobileMenuBtn">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <h1 class="page-title">Dashboard</h1>
+      <button class="btn-primary btn-add-transaction" id="addTransactionBtn">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+          <path d="M10 4V16M4 10H16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+        Tambah Transaksi
+      </button>
+    </header>
+
+    <div class="dashboard-container">
+      <!-- Filter Section -->
+      <section class="filter-section">
+        <div class="filter-group">
+          <label>Periode:</label>
+          <select id="filterPeriod" class="filter-select">
+            <option value="all">Semua Waktu</option>
+            <option value="today">Hari Ini</option>
+            <option value="week">Minggu Ini</option>
+            <option value="month" selected>Bulan Ini</option>
+            <option value="year">Tahun Ini</option>
+          </select>
+        </div>
+        <div class="filter-group">
+          <label>Tipe:</label>
+          <select id="filterType" class="filter-select">
+            <option value="">Semua</option>
+            <option value="income">Pemasukan</option>
+            <option value="expense">Pengeluaran</option>
+          </select>
+        </div>
+      </section>
+
+      <!-- Stats Cards -->
+      <section class="stats-grid">
+        <div class="stat-card balance-card">
+          <div class="stat-header">
+            <div class="stat-label">Total Saldo</div>
+            <div class="stat-icon">💰</div>
+          </div>
+          <div class="stat-value" id="totalBalance">Rp 0</div>
+          <div class="stat-trend" id="balanceTrend"></div>
+        </div>
+
+        <div class="stat-card income-card">
+          <div class="stat-header">
+            <div class="stat-label">Pemasukan</div>
+            <div class="stat-icon">📈</div>
+          </div>
+          <div class="stat-value" id="totalIncome">Rp 0</div>
+          <div class="stat-detail" id="incomeCount">0 transaksi</div>
+        </div>
+
+        <div class="stat-card expense-card">
+          <div class="stat-header">
+            <div class="stat-label">Pengeluaran</div>
+            <div class="stat-icon">📉</div>
+          </div>
+          <div class="stat-value" id="totalExpense">Rp 0</div>
+          <div class="stat-detail" id="expenseCount">0 transaksi</div>
+        </div>
+      </section>
+
+      <!-- Transactions List -->
+      <section class="transactions-section">
+        <div class="section-header">
+          <h2>Riwayat Transaksi</h2>
+          <span class="transaction-count" id="transactionCount">0 transaksi</span>
+        </div>
+        <div class="transactions-list" id="transactionsList">
+          <!-- Transactions will be rendered here -->
+        </div>
+      </section>
+
+      <!-- Category Breakdown -->
+      <section class="category-section">
+        <div class="category-tabs">
+          <button class="category-tab active" data-type="expense">Pengeluaran</button>
+          <button class="category-tab" data-type="income">Pemasukan</button>
+        </div>
+        <div class="category-breakdown" id="categoryBreakdown">
+          <!-- Category breakdown will be rendered here -->
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <!-- Transaction Modal -->
+  <div class="modal" id="transactionModal">
+    <div class="modal-overlay" onclick="UI.hideModal('transactionModal')"></div>
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 id="modalTitle">Tambah Transaksi</h3>
+        <button class="modal-close" onclick="UI.hideModal('transactionModal')">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </button>
+      </div>
+
+      <form id="transactionForm" class="transaction-form">
+        <input type="hidden" id="transactionId">
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="transactionType">Tipe Transaksi *</label>
+            <select id="transactionType" required>
+              <option value="income">Pemasukan</option>
+              <option value="expense">Pengeluaran</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="transactionDate">Tanggal *</label>
+            <input type="date" id="transactionDate" required>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="transactionCategory">Kategori *</label>
+          <select id="transactionCategory" required>
+            <!-- Options will be populated by JS -->
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="transactionAmount">Jumlah *</label>
+          <div class="input-with-prefix">
+            <span class="input-prefix">Rp</span>
+            <input type="number" id="transactionAmount" placeholder="0" min="0" step="1000" required>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="transactionDescription">Deskripsi (Opsional)</label>
+          <textarea id="transactionDescription" rows="3" placeholder="Catatan tambahan..."></textarea>
+        </div>
+
+        <div class="form-actions">
+          <button type="button" class="btn-secondary" onclick="UI.hideModal('transactionModal')">Batal</button>
+          <button type="submit" class="btn-primary" id="submitBtn">Simpan</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/api.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/transaksi.js"></script>
+  <script src="js/calculation.js"></script>
+  <script src="js/filter.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/dashboard.js"></script>
+</body>
+</html>
